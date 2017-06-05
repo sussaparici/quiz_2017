@@ -11,16 +11,14 @@ exports.load = function (req, res, next, quizId) {
             {model: models.Tip, include: [{model: models.User, as: 'Author'}]},
             {model: models.User, as: 'Author'}
         ]
-    })
-    .then(function (quiz) {
+    }).then(function (quiz) {
         if (quiz) {
             req.quiz = quiz;
             next();
         } else {
             throw new Error('No existe ningún quiz con id=' + quizId);
         }
-    })
-    .catch(function (error) {
+    }).catch(function (error) {
         next(error);
     });
 };

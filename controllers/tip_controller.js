@@ -8,16 +8,14 @@ exports.load = function (req, res, next, tipId) {
     models.Tip.findById(tipId, {
          include: [{model: models.User, as: 'Author'}
          ]
-     })
-    .then(function (tip) {
+     }).then(function (tip) {
         if (tip) {
             req.tip = tip;
             next();
         } else {
             next(new Error('No existe tipId=' + tipId));
         }
-    })
-    .catch(function (error) {
+    }).catch(function (error) {
         next(error);
     });
 };
@@ -87,10 +85,10 @@ exports.accept = function (req, res, next) {
     });
 };
 
-exports.adminOrAuthorTipRequired = function(req, es, next){
+exports.adminOrAuthorTipRequired = function(req, res, next){
     var isAdmin = req.session.user.isAdmin;
     var isAuthor = req.quiz.AuthorId === req.session.user.id;
-    var isAuthorTip = req.quiz.AuthorId === req.session.user.id;
+    var isAuthorTip = req.tip.AuthorId === req.session.user.id;
 
     if(isAdmin || isAuthor || isAuthorTip){
         next();
