@@ -31,7 +31,7 @@ router.get('/quizzes/:quizId(\\d+)/play',  quizController.play);
 router.get('/quizzes/:quizId(\\d+)/check', quizController.check);
 
 router.get('/quizzes/randomplay', quizController.randomplay);
-router.get('/quizzes/randomcheck/:quizId(\\d+)', quizController.randomcheck);
+router.get('/quizzes/:quizId(\\d+)/randomcheck', quizController.randomcheck);
 
 // Pagina de ayuda
 router.get('/help', function(req, res, next) {
